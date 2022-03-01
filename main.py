@@ -14,6 +14,10 @@ single_player = False
 game_over = False
 display_end_scene = False
 prompt = False
+time_left = 0
+minutes_left = 0
+seconds_left = 0
+
 lives_start_value = 6
 level_number = 1
 keys_gained = 0
@@ -57,7 +61,7 @@ ui_y_value = screen_height - ((screen_height - 683) / 2)
 
 
 # speed
-player_speed = 3
+player_speed = 4
 monster_speed = 6
 
 
@@ -728,6 +732,7 @@ def play_level(level, coordinates):
     global keys_gained
     # misc booleans
     global prompt, game_over, single_player, title_screen, display_leaderboard
+    global time_left, minutes_left, seconds_left
 
     # if someone closes the window end program
     for event in pygame.event.get():
@@ -1070,6 +1075,7 @@ def time_points(points, minutes_left, seconds_left):
     time_points = round((minutes_left * 60 + seconds_left) / 4)
     # add bonus points to the points
     points = points + time_points
+    print(time_points)
 
     return points, time_points
 
@@ -1573,7 +1579,6 @@ while game_on:
             level_1_points = avatar.points
 
             # giving bonus for completing level faster
-
             try:
                 avatar.points, time_points_var = time_points(avatar.points, minutes_left, seconds_left)
             except NameError:
